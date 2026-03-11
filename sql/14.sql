@@ -6,13 +6,15 @@
  * but requires an additional JOIN.
  */
 SELECT
-    EXTRACT(YEAR FROM r.rental_date) AS year,
-    EXTRACT(MONTH FROM r.rental_date) AS month,
-    SUM(p.amount) AS total_revenue
-FROM rental r
-JOIN payment p
-    ON r.rental_id = p.rental_id
+    EXTRACT (YEAR FROM rental_date) as "Year",
+    EXTRACT (MONTH FROM rental_date) as "Month",
+    SUM(amount) as "Total Revenue"
+FROM
+    rental
+JOIN payment ON payment.rental_id = rental.rental_id
 GROUP BY
-    EXTRACT(YEAR FROM r.rental_date),
-    ROLLUP(EXTRACT(MONTH FROM r.rental_date))
-ORDER BY year, month;
+    ROLLUP (
+        EXTRACT (YEAR FROM rental_date),
+        EXTRACT (MONTH FROM rental_date)
+    )
+ORDER BY "Year", "Month";
