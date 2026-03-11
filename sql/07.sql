@@ -17,6 +17,7 @@
  */
 SELECT DISTINCT title
 FROM film
+JOIN inventory ON film.film_id = inventory.film_id
 WHERE film.film_id NOT IN(
 	SELECT film_id FROM inventory
 	JOIN rental ON inventory.inventory_id = rental.inventory_id
