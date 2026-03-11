@@ -13,7 +13,7 @@ LEFT JOIN(
 	JOIN address USING(address_id)
 	JOIN city USING(city_id)
 	JOIN country USING(country_id)
-	WEHRE country = 'United States'
+	WHERE country = 'United States'
 	)
 WHERE us_rented.film_id IS null
 ORDER BY title;
